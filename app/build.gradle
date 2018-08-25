@@ -1,0 +1,456 @@
+/*
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.user.coffeeshop"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    //+ Krishnendu Mukherjee -12-FEB-2018 - Added the following dependencies for the purpose of automated testing
+//Dependency added for implementing Espresso
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+
+//Dependency added for implementing Barista 2
+    androidTestCompile('com.schibsted.spain:barista:2.2.0') {
+        exclude group: 'com.android.support'
+    }
+
+//Dependency added for implementing Spoon
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.7.1'
+
+}
+//- Krishnendu Mukherjee -12-FEB-2018 - Added the following dependencies for the purpose of automated testing
+*/
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+android {
+    lintOptions
+            {
+                checkReleaseBuilds false
+            }
+    signingConfigs {
+    }
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    useLibrary 'org.apache.http.legacy'
+    final CONTENT_PROVIDER_VAWSUM = "com.vawsum.content_providers"
+    final CONTENT_PROVIDER_NSJHS = "com.vawsum.nsjhs.content_providers"
+    final CONTENT_PROVIDER_KPSBHILAI = "com.vawsum.kpsbhilai.content_providers"
+    final CONTENT_PROVIDER_KPSPRESCHOOL = "com.vawsum.kpspreschool.content_providers"
+    final CONTENT_PROVIDER_SMHS = "com.vawsum.smhs.content_providers"
+    final CONTENT_PROVIDER_RAM = "com.vawsum.ram.content_providers"
+    final CONTENT_PROVIDER_WPS = "com.vawsum.wps.content_providers"
+    final CONTENT_PROVIDER_KPS = "com.vawsum.kps.content_providers"
+    final CONTENT_PROVIDER_ISS = "com.vawsum.iss.content_providers"
+    final CONTENT_PROVIDER_NIVEDITA = "com.vawsum.nivedita.content_providers"
+    final CONTENT_PROVIDER_OLIVIA = "com.vawsum.olivia.content_providers"
+    final CONTENT_PROVIDER_IVWS = "com.vawsum.ivws.content_providers"
+    final CONTENT_PROVIDER_IVWSK = "com.vawsum.ivwsk.content_providers"
+    final CONTENT_PROVIDER_BODHISUKHA = "com.vawsum.bodhisukha.content_providers"
+    final CONTENT_PROVIDER_OLIVIAKIDS = "com.vawsum.oliviakids.content_providers"
+    final CONTENT_PROVIDER_SPS = "com.vawsum.sps.content_providers"
+    final CONTENT_PROVIDER_DPWS = "com.vawsum.dpws.content_providers"
+    final CONTENT_PROVIDER_LAS = "com.vawsum.las.content_providers"
+
+    defaultConfig {
+        applicationId "com.vawsum"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 19066
+        versionName "1.9066"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:24.1.1'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        nsjhs {
+            minSdkVersion 16
+            applicationId 'com.stjohns.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_NSJHS + "\""
+
+        }
+        vawsum {
+            minSdkVersion 16
+            applicationId 'com.vawsum'
+            targetSdkVersion 23
+            versionCode 19066
+            versionName '1.9066'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_VAWSUM + "\""
+        }
+        kpsbhilai {
+            minSdkVersion 16
+            applicationId 'com.kpsbhilai.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_KPSBHILAI + "\""
+        }
+        kpspreschool {
+            minSdkVersion 16
+            applicationId 'com.kpspreschool.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_KPSPRESCHOOL + "\""
+        }
+
+        smhs {
+            minSdkVersion 16
+            applicationId 'com.smhs.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_SMHS + "\""
+        }
+        ram {
+            minSdkVersion 16
+            applicationId 'com.ram.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_RAM + "\""
+
+        }
+
+        wps {
+            minSdkVersion 16
+            applicationId 'com.wps.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_WPS + "\""
+
+        }
+        kps {
+            minSdkVersion 16
+            applicationId 'com.kps.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_KPS + "\""
+
+        }
+
+        olivia {
+            minSdkVersion 16
+            applicationId 'com.olivia.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_OLIVIA + "\""
+
+        }
+        nivedita {
+            minSdkVersion 16
+            applicationId 'com.nivedita.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_NIVEDITA + "\""
+
+        }
+        iss {
+            minSdkVersion 16
+            applicationId 'com.iss.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_ISS + "\""
+
+        }
+        ivws {
+            minSdkVersion 16
+            applicationId 'com.ivws.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_IVWS + "\""
+
+        }
+        ivwsk {
+            minSdkVersion 16
+            applicationId 'com.ivwsk.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_IVWSK + "\""
+
+        }
+        bodhisukha {
+            minSdkVersion 16
+            applicationId 'com.bodhisukha.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_BODHISUKHA + "\""
+
+        }
+        oliviakids {
+            minSdkVersion 16
+            applicationId 'com.oliviakids.vawsum'
+            targetSdkVersion 23
+            versionCode 19059
+            versionName '1.9059'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_OLIVIAKIDS + "\""
+
+        }
+        sps {
+            minSdkVersion 16
+            applicationId 'com.sps.vawsum'
+            targetSdkVersion 23
+            versionCode 19066
+            versionName '1.9066'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_SPS + "\""
+
+        }
+        dpws {
+            minSdkVersion 16
+            applicationId 'com.dpws.vawsum'
+            targetSdkVersion 23
+            versionCode 19065
+            versionName '1.9065'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_DPWS + "\""
+        }
+        las {
+            minSdkVersion 16
+            applicationId 'com.las.vawsum'
+            targetSdkVersion 23
+            versionCode 19065
+            versionName '1.9065'
+            multiDexEnabled true
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            buildConfigField "String", "PROVIDER_AUTHORITY", "\"" + CONTENT_PROVIDER_LAS + "\""
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+}
+
+
+
+
+
+//+ Krishnendu Mukherjee -12-FEB-2018 - Added the following dependencies for the purpose of automated testing
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
+    }
+}
+
+//Jacoco
+apply plugin: 'jacoco'
+
+//Spoon
+apply plugin: 'spoon'
+
+spoon {
+    // for debug output
+    debug = true
+
+    // Set ADB timeout. (minutes) (default is 10 mins)
+    adbTimeout = 5
+
+    codeCoverage = true
+
+    // To execute the tests device by device */
+    sequential = true
+
+    // Do not fail build if a test fails, let all the tests run and finish.
+    ignoreFailures = true
+
+    // To grant permissions to Android M >= devices */
+    // grantAllPermissions = true
+
+}
+//- Krishnendu Mukherjee -12-FEB-2018 - Added the following dependencies for the purpose of automated testing
+
+
+
+
+
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/httpcore-4.3.2.jar')
+    compile files('libs/hellocharts-library.jar')
+    compile files('libs/httpmime-4.3.4.jar')
+    compile files('libs/universal-image-loader-1.9.0.jar')
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
+        transitive = true
+    }
+    //compile project(path: ':nine_old_android')
+
+    compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
+        exclude module: 'support-v4'
+    }
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
+    compile 'com.android.support:cardview-v7:26.1.0'
+    compile 'com.google.android.gms:play-services-gcm:11.6.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.jakewharton:butterknife:8.1.0'
+    compile 'com.android.support:support-annotations:24.2.1'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.google.android.gms:play-services-maps:11.6.0'
+    compile 'com.google.android.gms:play-services-location:11.6.0'
+    compile 'com.google.android.gms:play-services-places:11.6.0'
+    compile 'com.facebook.stetho:stetho:1.4.2'
+    compile 'com.google.firebase:firebase-messaging:11.6.0'
+    compile 'com.google.firebase:firebase-core:11.6.0'
+    compile 'com.google.firebase:firebase-crash:11.6.0'
+    compile 'com.google.android.gms:play-services-drive:11.6.0'
+    compile 'com.wang.avi:library:2.1.3'
+    compile 'com.github.Plumillon:ChipView:1.2.0'
+    compile 'com.android.support:design:26.1.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+
+
+//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    androidTestCompile 'com.android.support.test:runner:0.5'
+
+
+    //+ Krishnendu Mukherjee -12-FEB-2018 - Added the following dependencies for the purpose of automated testing
+    //Dependency added for implementing Espresso
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+
+    //Dependency added for implementing Barista 2
+    androidTestCompile('com.schibsted.spain:barista:2.2.0') {
+        exclude group: 'com.android.support'
+    }
+
+    //Dependency added for implementing Spoon
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.7.1'
+//- Krishnendu Mukherjee -12-FEB-2018 - Added the following dependencies for the purpose of automated testing
+
+
+    compile 'com.jakewharton:butterknife:8.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.1.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.prolificinteractive:material-calendarview:1.4.3'
+    compile 'com.kingfisherphuoc:quick-action-dialog-fragment:1.1'
+    compile 'me.relex:circleindicator:1.2.2@aar'
+    //Burhan - 24-JUN-2017 - VM#919 - Adding dependency for CircleIndicator
+    compile files('libs/jxl.jar')
+    compile 'com.droidninja:filepicker:2.1.1'
+    compile 'com.github.bumptech.glide:glide:4.3.1'
+    compile 'io.nlopez.smartlocation:library:3.3.1'
+    //RAJU - 21-DEC-2017 - TD#670 - Adding dependency for Location
+    compile 'com.victor:lib:1.0.1'
+    compile 'org.jsoup:jsoup:1.10.3'
+    //Krishnendu Mukherjee - 18-JAN-2018 - VM#2467 - Adding dependency for Tag view
+    compile 'com.github.kaedea:Android-Cloud-TagView-Plus:b546a5f073'
+    compile group: 'com.cloudinary', name: 'cloudinary-android', version: '1.20.0'
+
+    compile('com.payumoney.sdkui:plug-n-play:1.1.0')
+}
